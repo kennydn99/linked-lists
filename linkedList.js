@@ -21,7 +21,7 @@ export default class LinkedList {
         currentNode = currentNode.next;
       }
       currentNode.next = newNode;
-      console.log(currentNode.next);
+      // console.log(currentNode.next);
     }
   }
 
@@ -41,7 +41,15 @@ export default class LinkedList {
 
   find(value) {}
 
-  toString() {}
+  toString() {
+    let output = "";
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      output += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.next;
+    }
+    return (output += `null`);
+  }
 
   insertAt(value, index) {}
 

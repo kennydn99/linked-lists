@@ -6,8 +6,7 @@ export default class LinkedList {
   }
 
   append(value) {
-    const newNode = new Node();
-    newNode.value = value;
+    const newNode = new Node(value);
 
     if (this.head === null) {
       this.head = newNode;
@@ -21,8 +20,7 @@ export default class LinkedList {
   }
 
   prepend(value) {
-    const newNode = new Node();
-    newNode.value = value;
+    const newNode = new Node(value);
 
     if (this.head === null) {
       this.head = newNode;
@@ -43,7 +41,7 @@ export default class LinkedList {
     return numNodes;
   }
 
-  head() {
+  getHead() {
     return this.head;
   }
 
@@ -57,7 +55,8 @@ export default class LinkedList {
   }
 
   at(index) {
-    if (index >= this.size() || index < 0) return "Out of bounds";
+    if (index >= this.size() || index < 0)
+      throw new Error("Index out of bounds");
     let currIndex = 0;
     let currentNode = this.head;
 
@@ -115,32 +114,37 @@ export default class LinkedList {
   }
 
   insertAt(value, index) {
-    if (index > this.size() || index < 0) return "Out of bounds";
+    if (index > this.size() || index < 0)
+      throw new Error("Index out of bounds");
 
+    const newNode = new Node(value);
     if (index === 0) {
-      this.prepend(value);
-    } else if (index === this.size()) {
-      this.append(value);
-    } else {
-      const newNode = new Node();
-      newNode.value = value;
-
-      let currentNode = this.at(index);
-      let prevNode = this.at(index - 1);
-      prevNode.next = newNode;
-      newNode.next = currentNode;
+      newNode.next = this.head;
+      this.head = newNode;
+      return;
     }
+
+    let prevNode = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      prevNode = prevNode.next;
+    }
+    newNode.next = prevNode.next;
+    prevNode.next = newNode;
   }
 
   removeAt(index) {
-    if (index >= this.size() || index < 0) return "Out of bounds";
+    if (index >= this.size() || index < 0)
+      throw new Error("Index out of bounds");
+
     if (index === 0) {
-      let nextNode = this.at(index + 1);
-      this.head = nextNode;
-    } else {
-      let node = this.at(index);
-      let prevNode = this.at(index - 1);
-      prevNode.next = node.next;
+      this.head = this.head.next;
+      return;
     }
+
+    let prevNode = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      prevNode = prevNode.next;
+    }
+    prevNode.next = prevNode.next.next;
   }
 }

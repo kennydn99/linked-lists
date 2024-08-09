@@ -1,0 +1,13 @@
+{
+  "name": "linked-lists",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "I will be implementing a singly linked list in Javascript, a project from The Odin Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

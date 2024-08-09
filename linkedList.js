@@ -39,6 +39,7 @@ export default class LinkedList {
   size() {
     let numNodes = 0;
     let currentNode = this.head;
+
     while (currentNode !== null) {
       numNodes++;
       currentNode = currentNode.next;
@@ -46,13 +47,46 @@ export default class LinkedList {
     return numNodes;
   }
 
-  head() {}
+  head() {
+    return this.head;
+  }
 
-  tail() {}
+  tail() {
+    if (this.head === null) return this.head;
+    let currentNode = this.head;
+    while (currentNode.next !== null) {
+      currentNode = currentNode.next;
+    }
+    return currentNode;
+  }
 
-  at(index) {}
+  at(index) {
+    if (index >= this.size() || index < 0) return "Out of bounds";
+    let currIndex = 0;
+    let currentNode = this.head;
 
-  pop() {}
+    while (currentNode !== null) {
+      if (currIndex === index) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+      currIndex++;
+    }
+  }
+
+  pop() {
+    if (this.head === null) {
+      return "LinkedList is empty, nothing to pop";
+    } else if (this.size() === 1) {
+      this.head = null;
+    } else {
+      let currentNode = this.head;
+      while (currentNode.next.next !== null) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = null;
+    }
+  }
 
   contains(value) {}
 

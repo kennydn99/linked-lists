@@ -21,13 +21,30 @@ export default class LinkedList {
         currentNode = currentNode.next;
       }
       currentNode.next = newNode;
-      // console.log(currentNode.next);
     }
   }
 
-  prepend(value) {}
+  prepend(value) {
+    const newNode = new Node();
+    newNode.value = value;
 
-  size() {}
+    if (this.head === null) {
+      this.head = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+  }
+
+  size() {
+    let numNodes = 0;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      numNodes++;
+      currentNode = currentNode.next;
+    }
+    return numNodes;
+  }
 
   head() {}
 

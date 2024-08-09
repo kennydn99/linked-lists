@@ -5,10 +5,6 @@ export default class LinkedList {
     this.head = null;
   }
 
-  test() {
-    console.log("test");
-  }
-
   append(value) {
     const newNode = new Node();
     newNode.value = value;
@@ -88,9 +84,25 @@ export default class LinkedList {
     }
   }
 
-  contains(value) {}
+  contains(value) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) return true;
+      currentNode = currentNode.next;
+    }
+    return false;
+  }
 
-  find(value) {}
+  find(value) {
+    let index = 0;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) return index;
+      currentNode = currentNode.next;
+      index++;
+    }
+    return null;
+  }
 
   toString() {
     let output = "";
@@ -102,7 +114,33 @@ export default class LinkedList {
     return (output += `null`);
   }
 
-  insertAt(value, index) {}
+  insertAt(value, index) {
+    if (index > this.size() || index < 0) return "Out of bounds";
 
-  removeAt(index) {}
+    if (index === 0) {
+      this.prepend(value);
+    } else if (index === this.size()) {
+      this.append(value);
+    } else {
+      const newNode = new Node();
+      newNode.value = value;
+
+      let currentNode = this.at(index);
+      let prevNode = this.at(index - 1);
+      prevNode.next = newNode;
+      newNode.next = currentNode;
+    }
+  }
+
+  removeAt(index) {
+    if (index >= this.size() || index < 0) return "Out of bounds";
+    if (index === 0) {
+      let nextNode = this.at(index + 1);
+      this.head = nextNode;
+    } else {
+      let node = this.at(index);
+      let prevNode = this.at(index - 1);
+      prevNode.next = node.next;
+    }
+  }
 }
